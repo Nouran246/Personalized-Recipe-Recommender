@@ -13,6 +13,15 @@ mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTop
   .then(() => console.log("MongoDB connected"))
   .catch((err) => console.log("MongoDB connection error:", err));
 
+// MongoDB event listeners for errors and disconnections
+mongoose.connection.on('error', (err) => {
+  console.error('MongoDB connection error:', err);
+});
+
+mongoose.connection.on('disconnected', () => {
+  console.warn('MongoDB disconnected! Trying to reconnect...');
+});
+
 // Routes
 app.get('/', (req, res) => {
   res.send('Hello from Node.js server!');
