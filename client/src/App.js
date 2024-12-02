@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import './styles/globals.css';
 
 const App = () => {
   const [items, setItems] = useState([]);
