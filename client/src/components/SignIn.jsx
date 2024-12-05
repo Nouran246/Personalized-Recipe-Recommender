@@ -11,7 +11,9 @@ function SignIn(){
     <input type="password" placeholder='Enter your password'/>
 
     </div>
+    <button>Sign In</button>
 </form>
+<p>Don't have account sign up here</p>
    </div>
 }
 export default SignIn
