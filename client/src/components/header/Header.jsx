@@ -1,10 +1,12 @@
 import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
 import Button from "../button/Button"; // Import your Button component
 import "./Header.css";
 
 const Header = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
     const [activeSection, setActiveSection] = useState("");
+    const navigate = useNavigate(); // Hook to navigate programmatically
 
     // Track scrolling to highlight active section
     useEffect(() => {
@@ -32,6 +34,11 @@ const Header = () => {
         setIsMenuOpen(false);
     };
 
+    // Function to navigate to the SignUp page
+    const goToSignUp = () => {
+        navigate("/sign-up"); // Navigate to the SignUp page
+    };
+
     return (
         <header className="header">
             <div className="header-container">
@@ -51,7 +58,7 @@ const Header = () => {
                         </li>
                     </ul>
                 </nav>
-                <Button variant="primary" size="small" onClick={() => alert("Get Started")}>
+                <Button variant="primary" size="small" onClick={goToSignUp}>  {/* Call goToSignUp here */}
                     Get Started
                 </Button>
                 <div

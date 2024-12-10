@@ -1,4 +1,5 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import axios from "axios";
 import "./globals.css";
 import HeroSection from "./sections/Hero";
@@ -6,31 +7,24 @@ import QuickInfo from "./sections/QuickInfo";
 import ExploreMore from "./sections/ExploreMore";
 import FAQ from "./components/FAQ/FAQ";
 import Header from "./components/header/Header";
+import SignUp from './components/SignIn_SignUp/SignUp'; // Import the SignUp component
 
 const App = () => {
-  const [items, setItems] = useState([]);
-
-  useEffect(() => {
-    // Fetch data from the backend
-    axios
-      .get("http://localhost:5000/api/items")
-      .then((response) => {
-        setItems(response.data);
-      })
-      .catch((error) => {
-        console.error("Error fetching data:", error);
-      });
-  }, []);
-
   return (
-    <div>
-      <Header />
+    <Router> {/* Wrap everything inside Router */}
+      <Header /> {/* Your header that contains the Get Started button */}
+      <Routes> {/* Define routes for different pages */}
+        <Route path="/sign-up" element={<SignUp />} />
+        {/* You can add more routes for other pages */}
+      </Routes>
+      
+      {/* Other sections in your app */}
       <div className="container">
         <section id="hero">
           <HeroSection />
         </section>
       </div>
-      <div className="container.Card">
+      <div className="container Card">
         <section id="why">
           <QuickInfo />
         </section>
@@ -50,9 +44,8 @@ const App = () => {
       <footer className="footer">
         <text>© 2024 Chef's Whispers. All rights reserved.</text>
       </footer>
-    </div>
+    </Router>
   );
 };
-
 
 export default App;
