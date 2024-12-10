@@ -1,0 +1,15 @@
+from node:16
+
+WORKDIR /app
+
+COPY package*.json /
+
+RUN npm i
+
+copy . .
+
+run npm run dev
+
+EXPOSE 3000
+
+CMD ["npm", "run", "dev"]
