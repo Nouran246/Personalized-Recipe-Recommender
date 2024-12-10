@@ -1,29 +1,52 @@
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import axios from "axios";
+import "./globals.css";
+import HeroSection from "./sections/Hero";
+import QuickInfo from "./sections/QuickInfo";
+import ExploreMore from "./sections/ExploreMore";
+import FAQ from "./components/FAQ/FAQ";
+import Header from "./components/header/Header";
+import SignUp from './components/SignIn_SignUp/SignUp';
+import SignIn from './components/SignIn_SignUp/SignIn'; // Add this import
 
 const App = () => {
-  const [items, setItems] = useState([]);
-
-  useEffect(() => {
-    // Fetch data from the backend
-    axios.get('http://localhost:5000/api/items')
-      .then((response) => {
-        setItems(response.data);
-      })
-      .catch((error) => {
-        console.error('Error fetching data:', error);
-      });
-  }, []);
-
   return (
-    <div>
-      <h1>Items from Backend:</h1>
-      <ul>
-        {items.map((item, index) => (
-          <li key={index}>{item.name}</li>
-        ))}
-      </ul>
-    </div>
+    <Router>
+      <Header />
+      <Routes>
+        <Route path="/sign-up" element={<SignUp />} />
+        <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/" element={
+          <>
+            <div className="container">
+              <section id="hero">
+                <HeroSection />
+              </section>
+            </div>
+            <div className="container Card">
+              <section id="why">
+                <QuickInfo />
+              </section>
+            </div>
+            <div className="container">
+              <section id="features">
+                <ExploreMore />
+              </section>
+            </div>
+            <div className="faq-section">
+              <section id="faq">
+                <FAQ />
+              </section>
+            </div>
+          </>
+        } />
+      </Routes>
+
+      <footer className="footer">
+        <text>© 2024 Chef's Whispers. All rights reserved.</text>
+      </footer>
+    </Router>
   );
 };
 
