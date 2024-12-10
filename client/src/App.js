@@ -7,39 +7,41 @@ import QuickInfo from "./sections/QuickInfo";
 import ExploreMore from "./sections/ExploreMore";
 import FAQ from "./components/FAQ/FAQ";
 import Header from "./components/header/Header";
-import SignUp from './components/SignIn_SignUp/SignUp'; // Import the SignUp component
+import SignUp from './components/SignIn_SignUp/SignUp';
+import SignIn from './components/SignIn_SignUp/SignIn'; // Add this import
 
 const App = () => {
   return (
-    <Router> {/* Wrap everything inside Router */}
-      <Header /> {/* Your header that contains the Get Started button */}
-      <Routes> {/* Define routes for different pages */}
+    <Router>
+      <Header />
+      <Routes>
         <Route path="/sign-up" element={<SignUp />} />
-        {/* You can add more routes for other pages */}
+        <Route path="/sign-in" element={<SignIn />} />
+        <Route path="/" element={
+          <>
+            <div className="container">
+              <section id="hero">
+                <HeroSection />
+              </section>
+            </div>
+            <div className="container Card">
+              <section id="why">
+                <QuickInfo />
+              </section>
+            </div>
+            <div className="container">
+              <section id="features">
+                <ExploreMore />
+              </section>
+            </div>
+            <div className="faq-section">
+              <section id="faq">
+                <FAQ />
+              </section>
+            </div>
+          </>
+        } />
       </Routes>
-      
-      {/* Other sections in your app */}
-      <div className="container">
-        <section id="hero">
-          <HeroSection />
-        </section>
-      </div>
-      <div className="container Card">
-        <section id="why">
-          <QuickInfo />
-        </section>
-      </div>
-      <div className="container">
-        <section id="features">
-          <ExploreMore />
-        </section>
-      </div>
-
-      <div className="faq-section">
-        <section id="faq">
-          <FAQ />
-        </section>
-      </div>
 
       <footer className="footer">
         <text>© 2024 Chef's Whispers. All rights reserved.</text>
