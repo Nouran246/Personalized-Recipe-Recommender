@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { validateSignUp } from '../utils/validateSignUp.js'; // Adjust path as necessary
-
+import "./SignIn_SignUp.css";
 export default class SignUp extends Component {
   state = {
     firstName: '',
