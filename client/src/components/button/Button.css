@@ -1,0 +1,45 @@
+/* Base Button Styles */
+.button {
+    font-family: var(--font-family-primary);
+    font-size: 1rem;
+    padding: 10px 20px;
+    border: none;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: background-color var(--transition-speed), transform var(--transition-speed);
+    color: white;
+    text-align: center;
+}
+
+/* Variants */
+.button.primary {
+    background-color: var(--primary);
+}
+
+.button.accent {
+    background-color: var(--accent);
+}
+
+/* Hover Effects */
+.button:hover {
+    filter: brightness(0.9);
+    /* Makes the button slightly darker */
+    transform: scale(1.05);
+    /* Adds a subtle scale effect */
+}
+
+/* Sizes */
+.button.small {
+    font-size: 0.75rem;
+    padding: 5px 15px;
+}
+
+.button.medium {
+    font-size: 1rem;
+    padding: 10px 20px;
+}
+
+.button.large {
+    font-size: 1.25rem;
+    padding: 15px 30px;
+}
