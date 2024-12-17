@@ -1,6 +1,3 @@
-html {
-  scroll-behavior: smooth; /* Smooth scrolling for anchor links */
-}
 body {
   
   background-color: #f2f6fa;
@@ -161,7 +158,7 @@ body {
 
 .text-content p {
   font-size: 18px;
-  color: #697e91; /* Subtle text color for paragraphs */
+  color: #666; /* Subtle text color for paragraphs */
   line-height: 1.6; /* Improve readability */
   margin-bottom: 20px;
 }
@@ -191,18 +188,6 @@ body {
   margin: 20px auto;
   max-width: 1200px; /* Limit the maximum width */
   padding: 20px;
-}
-/* Card Section */
-.card-section {
-  text-align: center; /* Center-align the heading */
-  margin: 40px 20px; /* Add spacing around the section */
-}
-
-.card-section-heading {
-  font-size: 2rem; /* Make the heading stand out */
-  color: #697e91; /* Use a bold and dark color for visibility */
-  margin-bottom: 20px; /* Add spacing between the heading and cards */
-  font-weight: bold;
 }
 
 /* Individual Card */
@@ -238,7 +223,7 @@ body {
 
 .card-content h3 {
   font-size: 1.5rem;
-  color: #697e91;
+  color: #333;
   margin-bottom: 10px;
 }
 
@@ -248,82 +233,6 @@ body {
   line-height: 1.5;
 }
 
-.footer {
-  background-color: #222;
-  color: #fff;
-  padding: 40px 20px;
-  text-align: left;
-}
-
-.footer-container {
-  display: flex;
-  justify-content: space-between;
-  flex-wrap: wrap;
-  max-width: 1200px;
-  margin: 0 auto;
-}
-
-.footer-section {
-  flex: 1;
-  margin: 10px 20px;
-  min-width: 200px;
-}
-
-.footer-section h2, .footer-section h3 {
-  color: #ff6f61;
-  margin-bottom: 15px;
-}
-
-.footer-section p {
-  font-size: 14px;
-  line-height: 1.6;
-}
-
-.footer-section ul {
-  list-style: none;
-  padding: 0;
-}
-
-.footer-section ul li {
-  margin-bottom: 10px;
-}
-
-.footer-section ul li a {
-  color: #fff;
-  text-decoration: none;
-  font-size: 14px;
-}
-
-.footer-section ul li a:hover {
-  color: #ff6f61;
-}
-
-.social-media .social-icons {
-  display: flex;
-  gap: 15px;
-}
-
-.social-media .social-icons a {
-  color: #fff;
-  font-size: 18px;
-  text-decoration: none;
-}
-
-.social-media .social-icons a:hover {
-  color: #ff6f61;
-}
-
-.footer-bottom {
-  text-align: center;
-  margin-top: 20px;
-  border-top: 1px solid #444;
-  padding-top: 10px;
-  font-size: 14px;
-}
-
-.footer-bottom p {
-  margin: 0;
-}
 
 
 code {
