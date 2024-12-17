@@ -81,11 +81,10 @@ const App = () => {
               <Footer />
             </>
           }
-        /> 
-        <Route path="/recipedetails" element={ <RecipeDetails /> } />
+        />
+        <Route path="/recipedetails" element={<RecipeDetails />} />
       </Routes>
     </div>
-  );
-};
-
+  )
+}
 export default App;

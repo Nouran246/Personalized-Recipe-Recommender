@@ -1,0 +1,300 @@
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css?family=Caveat%20Brush:700|Raleway:400');
+
+/* Define Root Variables for Styling */
+:root {
+  --text: #697e91;
+  --background: #f2f6fa;
+  --primary: #ffc29e;
+  --accent: #9e7bc2;
+  --border-radius: 30px;
+  --transition-speed: 0.3s;
+  --font-family-primary: 'Caveat Brush', cursive;
+  --font-family-secondary: 'Raleway', sans-serif;
+}
+
+/* Global Styles */
+body {
+  font-family: var(--font-family-secondary);
+  font-weight: 400;
+  background-color: var(--background);
+  color: var(--text);
+  margin: 0;
+  padding: 0;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+html,
+#root {
+  height: 100%;
+}
+
+/* Headings */
+h1,
+h2,
+h3,
+h4,
+h5 {
+  font-family: var(--font-family-primary);
+  font-weight: 700;
+  color: var(--text);
+  margin-top: 0;
+}
+
+html {
+  font-size: 100%;
+  /* Default 16px */
+}
+
+h1 {
+  font-size: 4.210rem;
+}
+
+/* 67.36px */
+h2 {
+  font-size: 3.158rem;
+}
+
+/* 50.56px */
+h3 {
+  font-size: 2.369rem;
+}
+
+/* 37.92px */
+h4 {
+  font-size: 1.777rem;
+}
+
+/* 28.48px */
+h5 {
+  font-size: 1.333rem;
+}
+
+/* 21.28px */
+small {
+  font-size: 0.750rem;
+}
+
+.footer text {
+  font-size: 1.2rem;
+  text-align: center;
+}
+
+
+/* 12px */
+
+/* Utility Classes */
+.text-center {
+  text-align: center;
+}
+
+.text-accent {
+  color: var(--accent);
+}
+
+.bg-primary {
+  background-color: var(--primary);
+}
+
+.bg-accent {
+  background-color: var(--accent);
+}
+
+/* Navbar */
+
+/* Footer */
+.footer {
+  text-align: center;
+  padding: 20px;
+  background-color: var(--background);
+  color: var(--text);
+  font-size: 0.875rem;
+}
+
+/* Animations */
+@keyframes fade {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeInOut {
+  0% {
+    opacity: 0;
+  }
+
+  50% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+  }
+}
+
+
+/* Container for consistent spacing */
+.container {
+  max-width: 1200px;
+  /* Optional: To prevent content from stretching too wide */
+  margin: 0 auto;
+  /* Centers the container */
+  padding: 0 50px;
+  /* Adds space on left and right edges */
+  box-sizing: border-box;
+  /* Ensures padding doesn't affect total width */
+}
+
+
+.container.Card {
+  max-width: 1200px;
+  /* Optional: To prevent content from stretching too wide */
+  margin: 0 auto;
+  /* Centers the container */
+  padding: 0 5px;
+  /* Adds space on left and right edges */
+  box-sizing: border-box;
+  /* Ensures padding doesn't affect total width */
+}
+
+@media (max-width: 768px) {
+  .container {
+    padding: 0 10px;
+  }
+}
+
+.highlight {
+  color: var(--accent)
+}
+
+/* General Layout */
+.landing-page {
+  font-family: var(--font-family-primary);
+  color: var(--text);
+  background-color: var(--background);
+}
+
+/* Hero Section */
+.hero {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60px 20px;
+  background-color: var(--primary);
+  color: var(--background);
+}
+
+.hero-content {
+  max-width: 600px;
+}
+
+.hero-content h1 {
+  font-size: 2.5rem;
+  margin-bottom: 20px;
+}
+
+.hero-content p {
+  font-size: 1.25rem;
+  margin-bottom: 30px;
+}
+
+.hero-image-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.hero-image {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* Quick Info Section */
+.quick-info {
+  padding: 50px 20px;
+  text-align: center;
+}
+
+.quick-info h2 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+}
+
+/* More Features Section */
+.more-features {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60px 20px;
+}
+
+.features-text {
+  max-width: 600px;
+}
+
+.features-text h2 {
+  font-size: 2rem;
+  margin-bottom: 20px;
+}
+
+.features-text p {
+  font-size: 1.25rem;
+  margin-bottom: 30px;
+}
+
+.features-image-container {
+  display: flex;
+  justify-content: center;
+}
+
+.features-image {
+  width: 100%;
+  max-width: 400px;
+}
+
+/* FAQ Section */
+.faq-section {
+  padding: 50px 20px;
+  background-color: var(--background);
+}
+
+.faq-section h2 {
+  font-size: 2rem;
+  margin-bottom: 30px;
+}
+
+.footer small {
+  font-family: var(--font-family-secondary);
+  font-size: 0.875rem;
+  color: var(--text);
+  opacity: 0.7;
+  text-align: center;
+
+}
