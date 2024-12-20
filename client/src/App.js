@@ -1,52 +1,51 @@
-import React from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import axios from "axios";
-import "./globals.css";
-import HeroSection from "./sections/Hero";
-import QuickInfo from "./sections/QuickInfo";
-import ExploreMore from "./sections/ExploreMore";
-import FAQ from "./components/FAQ/FAQ";
-import Header from "./components/header/Header";
-import SignUp from './components/SignIn_SignUp/SignUp';
-import SignIn from './components/SignIn_SignUp/SignIn'; // Add this import
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import Demo from './Demo';
+import Home from './Home';
+import About from './About';
+import Card from './Card';
 
 const App = () => {
-  return (
-    <Router>
-      <Header />
-      <Routes>
-        <Route path="/sign-up" element={<SignUp />} />
-        <Route path="/sign-in" element={<SignIn />} />
-        <Route path="/" element={
-          <>
-            <div className="container">
-              <section id="hero">
-                <HeroSection />
-              </section>
-            </div>
-            <div className="container Card">
-              <section id="why">
-                <QuickInfo />
-              </section>
-            </div>
-            <div className="container">
-              <section id="features">
-                <ExploreMore />
-              </section>
-            </div>
-            <div className="faq-section">
-              <section id="faq">
-                <FAQ />
-              </section>
-            </div>
-          </>
-        } />
-      </Routes>
+  const [items, setItems] = useState([]);
 
-      <footer className="footer">
-        <text>© 2024 Chef's Whispers. All rights reserved.</text>
-      </footer>
-    </Router>
+
+  //From this the data I am adding is dummy data later on it will be deleted when the local host has some data.
+
+  const dummyData = [
+    { id: 1, title: 'Dish A', description: 'A delicious dish.', image: '/path/to/image1.png' },
+    { id: 2, title: 'Dish B', description: 'A savory dish.', image: '/path/to/image2.png' },
+    { id: 3, title: 'Dish C', description: 'A sweet dish.', image: '/path/to/image3.png' },
+  ];
+  
+  useEffect(() => {
+    // Fetch data from the backend
+    axios.get('http://localhost:5000/api/items')
+      .then((response) => {
+        setItems(response.data);
+      })
+      .catch((error) => {
+        console.error('Error fetching data:', error);
+      });
+  }, []);
+
+  return (
+    <div>
+      <Demo />
+      <Home/>
+      <About/>
+      {/* <ul>
+        {items.map((item, index) => (
+          <li key={index}>{item.name}</li>
+        ))}
+      </ul> */}
+      <div className="card-container">
+        {dummyData.map((item) => (
+          <Card key={item.id} data={item} />
+        ))}
+      </div>
+
+      
+    </div>
   );
 };
 
