@@ -54,7 +54,7 @@ body, html, .App, #root, .auth-wrapper {
   width: 100%;
   max-width: 400px; /* Reduced from 450px */
   margin: auto;
-  background: #ffffff;
+  background: white;
   box-shadow: 0 8px 24px rgba(34, 35, 58, 0.1);
   padding: 30px; /* Reduced from 40px */
   border-radius: var(--border-radius);
@@ -83,6 +83,7 @@ body, html, .App, #root, .auth-wrapper {
   padding-bottom: 15px; /* Reduced from 20px */
   font-size: 2rem; /* Reduced from 2.369rem */
   color: var(--text);
+  margin-bottom: 1.5rem; /* Reduced spacing */
 }
 
 .custom-control-label {
@@ -133,6 +134,7 @@ body, html, .App, #root, .auth-wrapper {
   width: 16px; /* Reduced from 18px */
   height: 16px; /* Reduced from 18px */
   accent-color: var(--primary);
+  margin-right: 8px;
 }
 
 .forgot-password {
@@ -165,11 +167,11 @@ body, html, .App, #root, .auth-wrapper {
   margin: 0 auto;
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 0.5rem; /* Make inputs closer */
 }
 
 .auth-form-group {
-  margin-bottom: 0.875rem; /* Reduced from 1rem */
+  margin-bottom: 0.8rem; /* Reduced spacing */
 }
 
 .auth-actions {
@@ -202,6 +204,17 @@ body, html, .App, #root, .auth-wrapper {
   .auth-wrapper h3 {
     font-size: 1.75rem;
     padding-bottom: 12px;
+  }
+}
+
+/* Mobile responsiveness */
+@media (max-width: 480px) {
+  .auth-inner {
+    padding: 20px;
+  }
+  
+  .auth-wrapper h3 {
+    font-size: 1.8rem;
   }
 }
 

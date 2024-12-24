@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { useNavigate } from "react-router-dom"; // Import useNavigate for navigation
+import { useNavigate, NavLink } from "react-router-dom"; // Import useNavigate and NavLink for navigation
 import Button from "../button/Button"; // Import your Button component
 import "./Header.css";
 
@@ -44,17 +44,60 @@ const Header = () => {
             <div className="header-container">
                 <nav className={`nav ${isMenuOpen ? "open" : ""}`}>
                     <ul className="menu-list">
-                        <li className={activeSection === "hero" ? "active" : ""}>
-                            <a href="#hero" onClick={handleLinkClick}>Home</a>
+                        <li>
+                            <NavLink
+                                to="/"
+                                end
+                                className={({ isActive }) => (isActive ? 'active' : '')}
+                                onClick={handleLinkClick}
+                            >
+                                Home
+                            </NavLink>
                         </li>
-                        <li className={activeSection === "why" ? "active" : ""}>
-                            <a href="#why" onClick={handleLinkClick}>Why Us</a>
+                        <li>
+                            <a
+                                href="#why"
+                                className={activeSection === "why" ? "active" : ""}
+                                onClick={handleLinkClick}
+                            >
+                                Why
+                            </a>
                         </li>
-                        <li className={activeSection === "features" ? "active" : ""}>
-                            <a href="#features" onClick={handleLinkClick}>Features</a>
+                        <li>
+                            <a
+                                href="#features"
+                                className={activeSection === "features" ? "active" : ""}
+                                onClick={handleLinkClick}
+                            >
+                                Features
+                            </a>
                         </li>
-                        <li className={activeSection === "faq" ? "active" : ""}>
-                            <a href="#faq" onClick={handleLinkClick}>FAQ</a>
+                        <li>
+                            <a
+                                href="#faq"
+                                className={activeSection === "faq" ? "active" : ""}
+                                onClick={handleLinkClick}
+                            >
+                                FAQ
+                            </a>
+                        </li>
+                        <li>
+                            <NavLink
+                                to="/sign-in"
+                                className={({ isActive }) => (isActive ? 'active' : '')}
+                                onClick={handleLinkClick}
+                            >
+                                Sign In
+                            </NavLink>
+                        </li>
+                        <li>
+                            <NavLink
+                                to="/sign-up"
+                                className={({ isActive }) => (isActive ? 'active' : '')}
+                                onClick={handleLinkClick}
+                            >
+                                Sign Up
+                            </NavLink>
                         </li>
                     </ul>
                 </nav>

@@ -45,24 +45,26 @@
 }
 
 .custom-button {
-  padding: 10px 20px; /* Reduced from 12px 24px */
-  border-radius: calc(var(--border-radius) * 0.8); /* Slightly smaller radius */
+  padding: 10px 20px;
+  border-radius: calc(var(--border-radius) * 0.7);
   border: none;
   font-family: var(--font-family-secondary);
-  font-size: 0.9375rem; /* Reduced from 1rem */
+  font-size: 0.95rem;
   font-weight: 500;
   cursor: pointer;
   transition: all var(--transition-speed);
+  margin-top: 0.5rem;
 }
 
 .custom-button.primary {
   background-color: var(--primary);
   color: white;
+  height: 42px; /* Fixed height for better alignment */
 }
 
 .custom-button.primary:hover {
   background-color: var(--accent);
-  transform: translateY(-1px); /* Reduced from -2px */
+  transform: translateY(-1px);
 }
 
 .custom-button.full-width {
