@@ -1,6 +1,5 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import axios from "axios";
 import "./globals.css";
 import HeroSection from "./sections/Hero";
 import QuickInfo from "./sections/QuickInfo";
