@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { validateLogin } from '../../utils/validateSignIn';
 import "./SignIn_SignUp.css";
 import Button from "../button/Button";
+import Input from '../Input/Input';
 
 export default class Login extends Component {
   state = {
@@ -33,48 +34,49 @@ export default class Login extends Component {
     return (
       <div className="auth-wrapper">
         <div className="auth-inner">
-          <form onSubmit={this.handleSubmit}>
-            <h3>Sign In</h3>
-            <div className="mb-3">
-              <label>Email address</label>
-              <input
+          <form onSubmit={this.handleSubmit} className="auth-form-container">
+            <h3>Welcome Back!</h3>
+            
+            <div className="auth-form-group">
+              <Input
+                label="Email Address"
                 type="email"
                 name="email"
-                className="form-control"
-                placeholder="Enter email"
-                value={email} // This ensures the `email` variable is used
+                value={email}
                 onChange={this.handleChange}
+                placeholder="Enter your email"
+                error={errors.email}
+                required
               />
-              {errors.email && <p className="text-danger">{errors.email}</p>} {/* `errors` used */}
             </div>
-            <div className="mb-3">
-              <label>Password</label>
-              <input
+
+            <div className="auth-form-group">
+              <Input
+                label="Password"
                 type="password"
                 name="password"
-                className="form-control"
-                placeholder="Enter password"
-                value={password} // This ensures the `password` variable is used
+                value={password}
+                onChange={this.handleChange}
+                placeholder="Enter your password"
+                error={errors.password}
+                required
+              />
+            </div>
+
+            <div className="remember-me-container">
+              <input
+                type="checkbox"
+                name="rememberMe"
+                id="customCheck1"
+                checked={rememberMe}
                 onChange={this.handleChange}
               />
-              {errors.password && <p className="text-danger">{errors.password}</p>} {/* `errors` used */}
+              <label htmlFor="customCheck1">
+                Remember me
+              </label>
             </div>
-            <div className="mb-3">
-              <div className="custom-control custom-checkbox">
-                <input
-                  type="checkbox"
-                  name="rememberMe"
-                  className="custom-control-input"
-                  id="customCheck1"
-                  checked={rememberMe} // This ensures `rememberMe` is used
-                  onChange={this.handleChange}
-                />
-                <label className="custom-control-label" htmlFor="customCheck1">
-                  Remember me
-                </label>
-              </div>
-            </div>
-            <div className="d-grid">
+
+            <div className="auth-actions">
               <Button
                 type="submit"
                 variant="primary"
@@ -83,9 +85,12 @@ export default class Login extends Component {
                 Sign In
               </Button>
             </div>
-            <p className="forgot-password text-right">
-              Don't have an Account? <a href="/sign-up">Sign up</a>
-            </p>
+            
+            <div className="auth-links">
+              <p className="forgot-password">
+                Don't have an Account? <a href="/sign-up">Sign up</a>
+              </p>
+            </div>
           </form>
         </div>
       </div>

@@ -43,3 +43,33 @@
     font-size: 1.25rem;
     padding: 15px 30px;
 }
+
+.custom-button {
+  padding: 10px 20px; /* Reduced from 12px 24px */
+  border-radius: calc(var(--border-radius) * 0.8); /* Slightly smaller radius */
+  border: none;
+  font-family: var(--font-family-secondary);
+  font-size: 0.9375rem; /* Reduced from 1rem */
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-speed);
+}
+
+.custom-button.primary {
+  background-color: var(--primary);
+  color: white;
+}
+
+.custom-button.primary:hover {
+  background-color: var(--accent);
+  transform: translateY(-1px); /* Reduced from -2px */
+}
+
+.custom-button.full-width {
+  width: 100%;
+}
+
+.custom-button:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}

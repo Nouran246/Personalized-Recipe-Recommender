@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { validateSignUp } from "../../utils/validateSignUp";
 import "./SignIn_SignUp.css";
 import Button from "../button/Button";
+import Input from '../Input/Input';
 
 export default class SignUp extends Component {
   state = {
@@ -31,75 +32,79 @@ export default class SignUp extends Component {
     const { firstName, lastName, email, password, errors } = this.state;
 
     return (
-      <div className="auth-wrapper">
+      <main className="auth-wrapper">
         <div className="auth-inner">
-          <form onSubmit={this.handleSubmit}>
-            <h3>Sign Up</h3>
-            <div className="mb-3">
-              <label>First name</label>
-              <input
-                type="text"
+          <form onSubmit={this.handleSubmit} className="auth-form-container">
+            <h3>Create Account</h3>
+            
+            <div className="auth-form-group">
+              <Input
+                label="First Name"
                 name="firstName"
-                className="form-control"
-                placeholder="First name"
                 value={firstName}
                 onChange={this.handleChange}
+                placeholder="Enter your first name"
+                error={errors.firstName}
+                required
               />
-              {errors.firstName && (
-                <p className="text-danger">{errors.firstName}</p>
-              )}
             </div>
-            <div className="mb-3">
-              <label>Last name</label>
-              <input
-                type="text"
+
+            <div className="auth-form-group">
+              <Input
+                label="Last Name"
                 name="lastName"
-                className="form-control"
-                placeholder="Last name"
                 value={lastName}
                 onChange={this.handleChange}
+                placeholder="Enter your last name"
+                error={errors.lastName}
+                required
               />
-              {errors.lastName && (
-                <p className="text-danger">{errors.lastName}</p>
-              )}
             </div>
-            <div className="mb-3">
-              <label>Email address</label>
-              <input
+
+            <div className="auth-form-group">
+              <Input
+                label="Email Address"
                 type="email"
                 name="email"
-                className="form-control"
-                placeholder="Enter email"
                 value={email}
                 onChange={this.handleChange}
+                placeholder="Enter your email"
+                error={errors.email}
+                required
               />
-              {errors.email && <p className="text-danger">{errors.email}</p>}
             </div>
-            <div className="mb-3">
-              <label>Password</label>
-              <input
+
+            <div className="auth-form-group">
+              <Input
+                label="Password"
                 type="password"
                 name="password"
-                className="form-control"
-                placeholder="Enter password"
                 value={password}
                 onChange={this.handleChange}
+                placeholder="Create a password"
+                error={errors.password}
+                required
               />
-              {errors.password && (
-                <p className="text-danger">{errors.password}</p>
-              )}
             </div>
-            <div className="d-grid">
-              <Button variant="primary" size="large">
-                Sign Up
+
+            <div className="auth-actions">
+              <Button
+                type="submit"
+                variant="primary"
+                fullWidth
+              >
+                Create Account
               </Button>
             </div>
-            <p className="forgot-password text-right">
-              Already registered? <a href="/sign-in">Sign in</a>
-            </p>
+            
+            <div className="auth-links">
+              <p className="forgot-password">
+                Already registered? <a href="/sign-in">Sign in</a>
+              </p>
+            </div>
           </form>
         </div>
-      </div>
+      </main>
     );
   }
 }
