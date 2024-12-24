@@ -56,7 +56,7 @@ const Header = () => {
                         </li>
                         <li>
                             <a
-                                href="#why"
+                                href="/#why"
                                 className={activeSection === "why" ? "active" : ""}
                                 onClick={handleLinkClick}
                             >
@@ -65,7 +65,7 @@ const Header = () => {
                         </li>
                         <li>
                             <a
-                                href="#features"
+                                href="/#features"
                                 className={activeSection === "features" ? "active" : ""}
                                 onClick={handleLinkClick}
                             >
@@ -74,30 +74,12 @@ const Header = () => {
                         </li>
                         <li>
                             <a
-                                href="#faq"
+                                href="/#faq"
                                 className={activeSection === "faq" ? "active" : ""}
                                 onClick={handleLinkClick}
                             >
                                 FAQ
                             </a>
-                        </li>
-                        <li>
-                            <NavLink
-                                to="/sign-in"
-                                className={({ isActive }) => (isActive ? 'active' : '')}
-                                onClick={handleLinkClick}
-                            >
-                                Sign In
-                            </NavLink>
-                        </li>
-                        <li>
-                            <NavLink
-                                to="/sign-up"
-                                className={({ isActive }) => (isActive ? 'active' : '')}
-                                onClick={handleLinkClick}
-                            >
-                                Sign Up
-                            </NavLink>
                         </li>
                     </ul>
                 </nav>
