@@ -1,13 +1,71 @@
 const { app } = require('@azure/functions');
 
-app.http('httpTriggerJS', {
-    methods: ['GET', 'POST'],
+// Temporary in-memory "database" for demonstration
+let users = [];
+
+app.http('signUp', {
+    methods: ['POST'],
     authLevel: 'anonymous',
     handler: async (request, context) => {
-        context.log(`Http function processed request for url "${request.url}"`);
+        context.log('Sign-up request received');
 
-        const name = request.query.get('name') || await request.text() || 'world';
+        const requestBody = await request.json();
+        const { username, password } = requestBody;
 
-        return { body: `Hello, ${name}!` };
-    }
+        if (!username || !password) {
+            return {
+                status: 400,
+                body: 'Username and password are required.',
+            };
+        }
+
+        // Check if the user already exists
+        const existingUser = users.find(user => user.username === username);
+        if (existingUser) {
+            return {
+                status: 409,
+                body: 'User already exists.',
+            };
+        }
+
+        // Create a new user (this is just an example, passwords should be hashed in real apps)
+        users.push({ username, password });
+
+        return {
+            status: 201,
+            body: 'User signed up successfully!',
+        };
+    },
+});
+
+app.http('signIn', {
+    methods: ['POST'],
+    authLevel: 'anonymous',
+    handler: async (request, context) => {
+        context.log('Sign-in request received');
+
+        const requestBody = await request.json();
+        const { username, password } = requestBody;
+
+        if (!username || !password) {
+            return {
+                status: 400,
+                body: 'Username and password are required.',
+            };
+        }
+
+        // Check if the user exists and password matches
+        const user = users.find(user => user.username === username);
+        if (!user || user.password !== password) {
+            return {
+                status: 401,
+                body: 'Invalid username or password.',
+            };
+        }
+
+        return {
+            status: 200,
+            body: 'User signed in successfully!',
+        };
+    },
 });
