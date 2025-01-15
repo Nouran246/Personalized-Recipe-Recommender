@@ -7,8 +7,11 @@
     "test": "echo \"No tests yet...\""
   },
   "dependencies": {
-    "@azure/functions": "^4.0.0"
+    "@azure/data-tables": "^13.3.0",
+    "@azure/functions": "^4.0.0",
+    "bcrypt": "^5.1.1",
+    "dotenv": "^16.4.7",
+    "jsonwebtoken": "^9.0.2"
   },
-  "devDependencies": {},
   "main": "src/{index.js,functions/*.js}"
 }
