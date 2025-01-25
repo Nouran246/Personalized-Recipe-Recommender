@@ -28,7 +28,7 @@ export default class SignUp extends Component {
       this.setState({ isSubmitting: true, serverMessage: '' });
 
       try {
-        const response = await fetch('http://localhost:3000/signup', {
+        const response = await fetch('http://localhost:5000/signup', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',

@@ -12,17 +12,21 @@ app.use(express.json());
 
 // Connect to the Azure SQL Database once (reusable connection pool)
 let pool;
-sql.connect(dbConfig)
-  .then((connectionPool) => {
-    pool = connectionPool;  // Store the connection pool for later reuse
+const connectToDb = async () => {
+  try {
+    pool = await sql.connect(dbConfig);  // Store the connection pool for later reuse
     console.log('Connected to Azure SQL Database!');
-  })
-  .catch((err) => {
+  } catch (err) {
     console.error('Error connecting to database:', err);
-  });
+    process.exit(1);  // Exit the process if the DB connection fails
+  }
+};
+
+// Call connect function
+connectToDb();
 
 // Signup Route
-app.post('/signup', async (req, res) => {
+app.post('/Signup', async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
 
   try {
@@ -34,7 +38,7 @@ app.post('/signup', async (req, res) => {
     // Hash the password
     const hashedPassword = await bcrypt.hash(password, 10);
 
-    // Use the connection pool to insert the user
+    // Check if pool is available
     if (!pool) {
       return res.status(500).json({ error: 'Database connection not available.' });
     }
@@ -64,15 +68,19 @@ app.post('/signup', async (req, res) => {
 });
 
 // Example route (for testing)
-// Example API route (for testing)
-app.get('/api/test', (req, res) => {
-  res.json({ message: 'Hello from backend!' });
+app.get('/', (req, res) => {
+  res.send('Hello from back end');
 });
 
-// Catch-all route for React to handle all frontend routes
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'frontend/build', 'index.html'));
+// Handle server shutdown
+process.on('SIGINT', async () => {
+  if (pool) {
+    await pool.close();
+    console.log('Closed DB connection.');
+  }
+  process.exit();
 });
+
 // Start the server
 const port = process.env.PORT || 5000;
 app.listen(port, () => {
