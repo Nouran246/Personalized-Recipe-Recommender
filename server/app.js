@@ -1,40 +1,30 @@
 // app.js
 const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-require('dotenv').config(); // To load environment variables from .env file
+const sql = require('mssql');
+const config = require('./src/functions/dbConfig'); // Import the database configuration
 
 const app = express();
-app.use(cors());
-app.use(express.json()); // For parsing JSON requests
 
-// Connect to MongoDB
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log("MongoDB connected"))
-  .catch((err) => console.log("MongoDB connection error:", err));
+// Middleware, routes, etc.
+app.use(express.json());
 
-// MongoDB event listeners for errors and disconnections
-mongoose.connection.on('error', (err) => {
-  console.error('MongoDB connection error:', err);
-});
+// Connect to the Azure SQL Database
+sql.connect(config)
+  .then(pool => {
+    console.log('Connected to Azure SQL Database!');
+    // Here you can perform your database queries, e.g., create tables or fetch data
+  })
+  .catch(err => {
+    console.error('Error connecting to database:', err);
+  });
 
-mongoose.connection.on('disconnected', () => {
-  console.warn('MongoDB disconnected! Trying to reconnect...');
-});
-
-// Routes
+// Example route (add more routes as needed)
 app.get('/', (req, res) => {
-  res.send('Hello from Node.js server!');
-});
-
-// Define additional routes as needed, for example:
-app.get('/api/items', (req, res) => {
-  // Example route to fetch items from MongoDB
-  res.json([{ name: 'Item 1' }, { name: 'Item 2' }]);
+  res.send('Hello, world!');
 });
 
 // Start the server
-const PORT = process.env.PORT || 5000;
-app.listen(PORT, () => {
-  console.log(`Server is running on port ${PORT}`);
+const port = process.env.PORT || 3000;
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
 });
