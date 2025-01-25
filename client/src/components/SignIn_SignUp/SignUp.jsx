@@ -10,33 +10,79 @@ export default class SignUp extends Component {
     lastName: '',
     email: '',
     password: '',
-    errors: {}
+    errors: {},
+    isSubmitting: false,
+    serverMessage: '', // For success or error messages
   };
 
   handleChange = (e) => {
     this.setState({ [e.target.name]: e.target.value });
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
     const errors = validateSignUp(this.state);
     if (Object.keys(errors).length > 0) {
       this.setState({ errors });
     } else {
-      console.log('Form submitted successfully', this.state);
-      // Perform further actions like sending data to the server
+      this.setState({ isSubmitting: true, serverMessage: '' });
+
+      try {
+        const response = await fetch('http://localhost:3000/signup', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            firstName: this.state.firstName,
+            lastName: this.state.lastName,
+            email: this.state.email,
+            password: this.state.password,
+          }),
+        });
+
+        const result = await response.json();
+        if (response.ok) {
+          this.setState({
+            firstName: '',
+            lastName: '',
+            email: '',
+            password: '',
+            isSubmitting: false,
+            serverMessage: 'Account created successfully!',
+            errors: {},
+          });
+        } else {
+          this.setState({
+            isSubmitting: false,
+            serverMessage: result.error || 'Failed to create account.',
+          });
+        }
+      } catch (error) {
+        console.error('Error:', error);
+        this.setState({
+          isSubmitting: false,
+          serverMessage: 'An unexpected error occurred. Please try again later.',
+        });
+      }
     }
   };
 
   render() {
-    const { firstName, lastName, email, password, errors } = this.state;
+    const { firstName, lastName, email, password, errors, isSubmitting, serverMessage } = this.state;
 
     return (
       <main className="auth-wrapper">
         <div className="auth-inner">
           <form onSubmit={this.handleSubmit} className="auth-form-container">
             <h3>Create Account</h3>
-            
+
+            {serverMessage && (
+              <p className={`server-message ${serverMessage.includes('success') ? 'success' : 'error'}`}>
+                {serverMessage}
+              </p>
+            )}
+
             <div className="auth-form-group">
               <Input
                 label="First Name"
@@ -92,11 +138,12 @@ export default class SignUp extends Component {
                 type="submit"
                 variant="primary"
                 fullWidth
+                disabled={isSubmitting}
               >
-                Create Account
+                {isSubmitting ? 'Creating Account...' : 'Create Account'}
               </Button>
             </div>
-            
+
             <div className="auth-links">
               <p className="forgot-password">
                 Already registered? <a href="/sign-in">Sign in</a>
