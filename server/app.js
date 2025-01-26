@@ -66,6 +66,39 @@ app.post('/Signup', async (req, res) => {
     res.status(500).json({ error: 'An error occurred while signing up.' });
   }
 });
+app.post('/login', async (req, res) => {
+  const { email, password } = req.body;
+
+  try {
+    if (!email || !password) {
+      return res.status(400).json({ error: 'Email and password are required.' });
+    }
+
+    const request = pool.request();
+    const result = await request
+      .input('email', sql.NVarChar(100), email)
+      .query('SELECT * FROM Users WHERE Email = @email');
+
+    const user = result.recordset[0];
+
+    if (!user) {
+      return res.status(404).json({ error: 'User not found.' });
+    }
+
+    // Compare the hashed password with the stored password hash
+    const isPasswordValid = await bcrypt.compare(password, user.PasswordHash);
+    if (!isPasswordValid) {
+      return res.status(401).json({ error: 'Invalid credentials.' });
+    }
+
+    // Handle login success (you can generate a session or JWT here)
+    res.status(200).json({ message: 'Login successful!' });
+
+  } catch (err) {
+    console.error('Error during login:', err);
+    res.status(500).json({ error: 'An error occurred while logging in.' });
+  }
+});
 
 // Example route (for testing)
 app.get('/', (req, res) => {
