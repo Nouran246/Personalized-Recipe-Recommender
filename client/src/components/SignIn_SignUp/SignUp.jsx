@@ -3,7 +3,7 @@ import { validateSignUp } from "../../utils/validateSignUp";
 import "./SignIn_SignUp.css";
 import Button from "../button/Button";
 import Input from '../Input/Input';
-
+import { Link } from 'react-router-dom';
 export default class SignUp extends Component {
   state = {
     firstName: '',
@@ -146,7 +146,7 @@ export default class SignUp extends Component {
 
             <div className="auth-links">
               <p className="forgot-password">
-                Already registered? <a href="/sign-in">Sign in</a>
+                Already registered? <Link to="/sign-in">Sign in</Link>
               </p>
             </div>
           </form>
