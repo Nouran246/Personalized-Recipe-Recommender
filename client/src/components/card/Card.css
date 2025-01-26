@@ -12,10 +12,10 @@
 
 /* Color Variants */
 .card.primary {
-    background-color: var(--primary);
+    border: 1px solid var(--primary);
     color: var(--text);
-
     /* Default text color for primary */
+    background-color: white;
 }
 
 .card.accent {

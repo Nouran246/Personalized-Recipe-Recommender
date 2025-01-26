@@ -1,7 +1,7 @@
 import React from "react";
 import Button from "../components/button/Button";
 import "./styles/Hero.css";
-
+import { Link } from 'react-router-dom';
 const HeroSection = () => {
     return (
         <section className="hero-section">
@@ -12,8 +12,11 @@ const HeroSection = () => {
                     Your personalized recipe guide to make cooking simple and magical.
                     Bring the whispers of flavor to your kitchen today!
                 </p>
-                <Button variant="primary" size="large">Start Cooking</Button>
-            </div>
+                <Link to="/sign-in">
+  <Button variant="primary" size="large">
+    Start Cooking
+  </Button>
+</Link>            </div>
 
             {/* Right Card with Favicon */}
             <div className="hero-card">
