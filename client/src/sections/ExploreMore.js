@@ -6,7 +6,7 @@ const ExploreMore = () => {
     return (
         <section className="explore-more-section">
             <div className="explore-image">
-                <img src="/path-to-image/explore-more.png" alt="Explore More Features" />
+                <img src="/Untitled.jpg" alt="Explore More Features" />
             </div>
             <div className="explore-content">
                 <h2>Explore <span className="highlight">The</span> Features</h2>
