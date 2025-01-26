@@ -3,7 +3,7 @@ import { validateLogin } from '../../utils/validateSignIn';
 import "./SignIn_SignUp.css";
 import Button from "../button/Button";
 import Input from '../Input/Input';
-
+import { Link } from 'react-router-dom';
 export default class Login extends Component {
   state = {
     email: '',
@@ -118,7 +118,7 @@ export default class Login extends Component {
 
             <div className="auth-links">
               <p className="forgot-password">
-                Don't have an Account? <a href="/sign-up">Sign up</a>
+                Don't have an Account? <Link to="/sign-up">Sign up</Link>
               </p>
             </div>
           </form>
