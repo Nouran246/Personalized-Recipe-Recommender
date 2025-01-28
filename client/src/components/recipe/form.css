@@ -1,0 +1,341 @@
+/* General Styles */
+:root {
+    --text: #697e91;
+    --background: #f2f6fa;
+    --primary: #ffc29e;
+    --accent: #9e7bc2;
+    --border-radius: 30px;
+    --transition-speed: 0.3s;
+    --font-family-primary: 'Caveat Brush', cursive;
+    --font-family-secondary: 'Raleway', sans-serif;
+  }
+  
+  .recipe-recommendation {
+      background-color: var(--background);
+      padding: 6rem 2rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      font-family: var(--font-family-secondary);
+  }
+  
+  .recipe-content {
+      background: --background;
+      border-radius: var(--border-radius);
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+      padding: 3rem 4rem;
+      max-width: 900px;
+      width: 100%;
+      border: 1px solid #e0e0e0;
+      margin: auto;
+  }
+  
+  .recipe-title {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--text);
+      margin-bottom: 1rem;
+      text-align: center;
+      font-family: var(--font-family-primary);
+  }
+  
+  .recipe-description {
+      font-size: 1.2rem;
+      color: var(--text);
+      text-align: center;
+      margin-bottom: 2rem;
+      line-height: 1.6;
+  }
+  
+  /* Recipe Form */
+  .recipe-form {
+      display: flex;
+      flex-direction: column;
+      gap: 2rem;
+  }
+  
+  .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+  }
+  
+  .form-label {
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--text);
+  }
+  
+  .input-field {
+      padding: 1rem;
+      border: 1px solid #ccc;
+      border-radius: var(--border-radius);
+      font-size: 1.1rem;
+      outline: none;
+      transition: all var(--transition-speed) ease;
+      background-color: var(--background);
+  }
+  
+  .input-field:focus {
+      border-color: var(--primary);
+      background-color: white;
+  }
+  
+  .ingredient-field {
+      flex: 1;
+  }
+  
+  .ingredients-input {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+  }
+  
+  .ingredients-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.75rem;
+  }
+  
+  .ingredient-tag {
+      background: var(--primary);
+      padding: 0.75rem 1.25rem;
+      border-radius: 25px;
+      font-size: 1rem;
+      color: var(--background);
+      font-weight: 500;
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .ingredient-tag:hover {
+      background: #ffb374;
+      cursor: pointer;
+  }
+  
+  .button-submit {
+      background-color: var(--primary);
+      color: white;
+      padding: 1rem 2rem;
+      border: none;
+      border-radius: var(--border-radius);
+      font-size: 1.1rem;
+      cursor: pointer;
+      transition: background-color var(--transition-speed) ease;
+      width: max-content;
+      margin: 0 auto;
+  }
+  
+  .button-submit:hover {
+      background-color: var(--accent);
+  }
+  .ingredients-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+}
+
+.ingredient-tag {
+    background: var(--primary);
+    padding: 0.75rem 1.25rem;
+    border-radius: 25px;
+    font-size: 1rem;
+    color: var(--background);
+    font-weight: 500;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-right: 1rem; /* Adjust for space between text and button */
+}
+
+.ingredient-tag button {
+    background: none;
+    border: none;
+    color: var(--background);
+    font-size: 1.2rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: color var(--transition-speed) ease;
+    margin-left: 0.5rem;
+    padding: 0;
+}
+
+.ingredient-tag button:hover {
+    color: #ff6f61; /* Change color on hover */
+}
+
+.ingredient-tag button:focus {
+    outline: none;
+    color: #d9534f; /* Focus color */
+}
+/* Ingredient Field */
+.ingredient-field {
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: var(--border-radius);
+    font-size: 1.1rem;
+    outline: none;
+    transition: all var(--transition-speed) ease;
+    background-color: var(--background);
+    width: 100%;
+    box-sizing: border-box; /* Ensure padding is included in width */
+}
+
+/* Focus state for ingredient field */
+.ingredient-field:focus {
+    border-color: var(--primary);
+    background-color: white;
+}
+
+/* Styling for input fields inside ingredients input */
+.ingredients-input {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+    justify-content: space-between; /* Added to align items properly */
+}
+
+/* Additional styling for placeholder text */
+.ingredient-field::placeholder {
+    color: var(--text);
+    opacity: 0.7;
+    font-style: italic;
+}
+
+/* Responsive Input Field */
+@media (max-width: 768px) {
+    .ingredient-field {
+        font-size: 1rem;
+        padding: 0.75rem;
+    }
+}
+/* Notes Textarea */
+.notes-field {
+    padding: 1rem;
+    border: 1px solid #ccc;
+    border-radius: var(--border-radius);
+    font-size: 1.1rem;
+    outline: none;
+    transition: all var(--transition-speed) ease;
+    background-color: var(--background);
+    width: 100%;
+    height: 150px; /* Adjust height for better visibility */
+    box-sizing: border-box; /* Ensure padding is included in width/height */
+    resize: vertical; /* Allow the user to resize vertically */
+}
+
+/* Focus state for notes field */
+.notes-field:focus {
+    border-color: var(--primary);
+    background-color: white;
+}
+
+/* Styling for placeholder text */
+.notes-field::placeholder {
+    color: var(--text);
+    opacity: 0.7;
+    font-style: italic;
+}
+
+/* Responsive Textarea */
+@media (max-width: 768px) {
+    .notes-field {
+        font-size: 1rem;
+        padding: 0.75rem;
+        height: 120px; /* Adjust height on smaller screens */
+    }
+}
+.form-group {
+    margin-bottom: 20px;
+  }
+  
+  .form-label {
+    font-size: 1.5em; /* Increase label font size */
+    display: block;
+    margin-bottom: 10px;
+  }
+  
+  .calories-slider-container {
+    display: flex;
+    align-items: center;
+    gap: 15px; /* Increase spacing between slider and value */
+  }
+  
+  .calories-slider {
+    width: 100%; /* Make the slider wider */
+    height: 20px; /* Increase slider height */
+  }
+  
+  .calories-value {
+    font-size: 1.5em; /* Increase value font size */
+    min-width: 100px; /* Ensure enough space for the value */
+  }
+  
+  .error-message {
+    font-size: 1.2em; /* Increase error message font size */
+    color: red;
+    margin-top: 5px;
+  }
+  /* Style the slider track (the background part of the slider) */
+
+  .calories-slider {
+    -webkit-appearance: none; /* Remove default styling */
+    appearance: none;
+    width: 100%;
+    height: 8px; /* Adjust height of the track */
+    background: linear-gradient(
+      to right,
+      var(--primary) 0%,
+      var(--primary) var(--slider-progress),
+      #ddd var(--slider-progress),
+      #ddd 100%
+    );
+    border-radius: 5px; /* Rounded corners for the track */
+    outline: none;
+    opacity: 0.7;
+    transition: opacity 0.2s;
+  }
+  
+  /* Style the slider thumb (the draggable part) */
+  .calories-slider::-webkit-slider-thumb {
+    -webkit-appearance: none; /* Remove default styling */
+    appearance: none;
+    width: 20px; /* Width of the thumb */
+    height: 20px; /* Height of the thumb */
+    background-color: var(--primary); /* Color of the thumb */
+    border-radius: 50%; /* Make the thumb circular */
+    cursor: pointer; /* Pointer cursor on hover */
+  }
+  
+  .calories-slider::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  .calories-slider::-ms-thumb {
+    width: 20px;
+    height: 20px;
+    background-color: var(--primary);
+    border-radius: 50%;
+    cursor: pointer;
+  }
+  
+  /* Optional: Change the track color when the slider is active */
+  .calories-slider:hover {
+    opacity: 1;
+  }
+  /* For secondary button variant */
+button.secondary {
+    background-color: var(--primary);  /* Button background color */
+    color: var(--background);           /* Button text color */
+ 
+  }
+  
+  button.secondary:hover {
+    background-color: darken(var(--primary), 10%); /* Slightly darken on hover */
+  }
+  

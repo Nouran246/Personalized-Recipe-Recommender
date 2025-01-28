@@ -7,7 +7,8 @@ import ExploreMore from "./sections/ExploreMore";
 import FAQ from "./components/FAQ/FAQ";
 import Header from "./components/header/Header";
 import SignUp from './components/SignIn_SignUp/SignUp';
-import SignIn from './components/SignIn_SignUp/SignIn'; // Add this import
+import SignIn from './components/SignIn_SignUp/SignIn'; 
+import Form from './components/recipe/form'; // Capitalized "Form"
 
 const App = () => {
   return (
@@ -18,6 +19,7 @@ const App = () => {
           <Routes>
             <Route path="/sign-up" element={<SignUp />} />
             <Route path="/sign-in" element={<SignIn />} />
+            <Route path="/form" element={<Form />} /> {/* Capitalized "Form" */}
             <Route path="/" element={
               <>
                 <div className="container">
