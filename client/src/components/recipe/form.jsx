@@ -12,6 +12,7 @@ export default class RecipeRecommendation extends Component {
   state = {
     ingredients: [],
     maxCalories: 500,
+    servings: 1, // Default servings is 1
     notes: '',
     errors: {},
     currentIngredient: '',
@@ -63,6 +64,12 @@ export default class RecipeRecommendation extends Component {
     });
   };
 
+  handleServingsChange = (type) => {
+    this.setState((prevState) => ({
+      servings: type === 'increment' ? prevState.servings + 1 : Math.max(1, prevState.servings - 1), // Ensure servings don't go below 1
+    }));
+  };
+
   handleSubmit = (e) => {
     e.preventDefault();
     const errors = this.validateForm();
@@ -73,6 +80,7 @@ export default class RecipeRecommendation extends Component {
       this.setState({
         ingredients: [],
         maxCalories: 500,
+        servings: 1,
         notes: '',
         errors: {},
         currentIngredient: '',
@@ -94,7 +102,7 @@ export default class RecipeRecommendation extends Component {
   };
 
   render() {
-    const { ingredients, maxCalories, notes, errors, currentIngredient } = this.state;
+    const { ingredients, maxCalories, servings, notes, errors, currentIngredient } = this.state;
 
     return (
       <section className="recipe-recommendation">
@@ -105,6 +113,7 @@ export default class RecipeRecommendation extends Component {
           </p>
 
           <div className="recipe-form">
+            {/* Ingredients Input Section */}
             <div className="form-group">
               <label className="form-label">Ingredients</label>
               <div className="ingredients-input">
@@ -135,6 +144,7 @@ export default class RecipeRecommendation extends Component {
               {errors.ingredients && <span className="error-message">{errors.ingredients}</span>}
             </div>
 
+            {/* Maximum Calories Slider Section */}
             <div className="form-group">
               <label className="form-label">Maximum Calories</label>
               <div className="calories-slider-container">
@@ -153,6 +163,29 @@ export default class RecipeRecommendation extends Component {
               {errors.maxCalories && <span className="error-message">{errors.maxCalories}</span>}
             </div>
 
+            {/* Servings Control Section */}
+            <div className="form-group flex items-center space-x-4">
+              <label className="form-label">Number of Servings</label>
+              <div className="servings-controls flex items-center space-x-2">
+                <Button
+                  type="button"
+                  onClick={() => this.handleServingsChange('decrement')}
+                  className="bg-gray-300 text-lg text-center w-8 h-8 rounded-full"
+                >
+                  -
+                </Button>
+                <span className="text-lg font-semibold">{servings}</span>
+                <Button
+                  type="button"
+                  onClick={() => this.handleServingsChange('increment')}
+                  className="bg-gray-300 text-lg text-center w-8 h-8 rounded-full"
+                >
+                  +
+                </Button>
+              </div>
+            </div>
+
+            {/* Additional Notes Section */}
             <div className="form-group">
               <label className="form-label">Additional Notes</label>
               <textarea
@@ -164,6 +197,7 @@ export default class RecipeRecommendation extends Component {
               />
             </div>
 
+            {/* Submit Button */}
             <div className="form-actions">
               <Button
                 type="submit"

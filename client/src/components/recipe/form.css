@@ -338,4 +338,22 @@ button.secondary {
   button.secondary:hover {
     background-color: darken(var(--primary), 10%); /* Slightly darken on hover */
   }
+  .servings-controls span {
+    font-size: 1.5rem; /* Increase the font size */
+    font-weight: bold; /* Make it bold for better visibility */
+    margin: 0 20px; /* Add horizontal space around the number */
+    padding: 0 10px; /* Add some padding for extra spacing */
+  }
+  
+  .servings-controls button {
+    font-size: 2rem; /* Increase font size */
+    padding: 10px 15px; /* Add some padding to make the buttons larger */
+    background-color: #f0f0f0; /* Optional: Light background color */
+    border: 1px solid #ccc; /* Optional: Border for button */
+    cursor: pointer; /* Make the pointer show when hovering over the button */
+  }
+  
+  .servings-controls button:hover {
+    background-color: #ddd; /* Change background color on hover */
+  }
   
