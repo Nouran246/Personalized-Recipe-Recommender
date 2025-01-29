@@ -3,8 +3,15 @@ import { validateSignUp } from "../../utils/validateSignUp";
 import "./SignIn_SignUp.css";
 import Button from "../button/Button";
 import Input from '../Input/Input';
-import { Link } from 'react-router-dom';
-export default class SignUp extends Component {
+import { Link, useNavigate } from 'react-router-dom';
+
+// Wrapper to use `useNavigate` in a class component
+function SignUpWrapper(props) {
+  const navigate = useNavigate();
+  return <SignUp {...props} navigate={navigate} />;
+}
+
+class SignUp extends Component {
   state = {
     firstName: '',
     lastName: '',
@@ -52,6 +59,9 @@ export default class SignUp extends Component {
             serverMessage: 'Account created successfully!',
             errors: {},
           });
+
+          // Redirect to /form after successful sign-up
+          this.props.navigate('/form');
         } else {
           this.setState({
             isSubmitting: false,
@@ -155,3 +165,5 @@ export default class SignUp extends Component {
     );
   }
 }
+
+export default SignUpWrapper;
