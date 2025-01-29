@@ -1,16 +1,24 @@
 import React, { Component } from 'react';
 import { validateLogin } from '../../utils/validateSignIn';
-import "./SignIn_SignUp.css";
-import Button from "../button/Button";
-import Input from '../Input/Input';
 import { Link } from 'react-router-dom';
-export default class Login extends Component {
+import Button from '../button/Button';
+import Input from '../Input/Input';
+import './SignIn_SignUp.css';
+import { useNavigate } from 'react-router-dom';
+
+// Wrapper component to use navigate in class component
+function LoginWrapper(props) {
+  const navigate = useNavigate();
+  return <Login {...props} navigate={navigate} />;
+}
+
+class Login extends Component {
   state = {
     email: '',
     password: '',
     rememberMe: false,
     errors: {},
-    serverMessage: '', // For success or error messages
+    serverMessage: '',
   };
 
   handleChange = (e) => {
@@ -40,14 +48,12 @@ export default class Login extends Component {
 
         const result = await response.json();
         if (response.ok) {
-          this.setState({
-            serverMessage: 'Login successful!',
-            // Redirect or update the UI accordingly
-          });
+          this.setState({ serverMessage: 'Login successful!' });
+
+          // Redirect to /form
+          this.props.navigate('/form');
         } else {
-          this.setState({
-            serverMessage: result.error || 'Failed to log in.',
-          });
+          this.setState({ serverMessage: result.error || 'Failed to log in.' });
         }
       } catch (error) {
         console.error('Error:', error);
@@ -127,3 +133,5 @@ export default class Login extends Component {
     );
   }
 }
+
+export default LoginWrapper;
