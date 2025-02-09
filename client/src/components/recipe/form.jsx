@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import "./form.css";
 import Button from "../button/Button";
+import Chat from "../chat/Chat";
+import { recipeService } from "../../services/recipeService";
 
 export default class RecipeRecommendation extends Component {
   constructor(props) {
@@ -16,6 +18,10 @@ export default class RecipeRecommendation extends Component {
     notes: '',
     errors: {},
     currentIngredient: '',
+    messages: [],
+    isLoading: false,
+    lastResponse: null,
+    showChat: false, // Add this new state property
   };
 
   componentDidMount() {
@@ -70,21 +76,79 @@ export default class RecipeRecommendation extends Component {
     }));
   };
 
-  handleSubmit = (e) => {
+  handleSubmit = async (e) => {
     e.preventDefault();
     const errors = this.validateForm();
     if (Object.keys(errors).length > 0) {
       this.setState({ errors });
-    } else {
-      alert("Recipe recommendation request submitted successfully!");
-      this.setState({
-        ingredients: [],
-        maxCalories: 500,
-        servings: 1,
-        notes: '',
-        errors: {},
-        currentIngredient: '',
+      return;
+    }
+
+    this.setState({ isLoading: true, showChat: true });
+
+    try {
+      const { ingredients, maxCalories, servings, notes } = this.state;
+      console.log('Submitting recipe request with:', { ingredients, maxCalories, servings, notes });
+
+      const response = await recipeService.getRecipeRecommendation({
+        ingredients,
+        maxCalories: parseInt(maxCalories),
+        servings: parseInt(servings),
+        showInstructions: true,
+        followUp: false,
+        notes
       });
+
+      console.log('Received response:', response);
+
+      this.setState(prevState => ({
+        messages: [
+          ...prevState.messages,
+          { type: 'user', content: `Generate recipe with: ${ingredients.join(', ')}` },
+          { type: 'system', content: response }
+        ],
+        lastResponse: response,
+        isLoading: false
+      }));
+    } catch (error) {
+      console.error('Form submission error:', error);
+      this.setState({
+        errors: { submit: `Error: ${error.message}` },
+        isLoading: false,
+        messages: [
+          ...this.state.messages,
+          { type: 'system', content: `Error: ${error.message}. Please try again.` }
+        ]
+      });
+    }
+  };
+
+  handleChatMessage = async (message) => {
+    this.setState(prevState => ({
+      messages: [...prevState.messages, { type: 'user', content: message }],
+      isLoading: true
+    }));
+
+    try {
+      const response = await recipeService.getRecipeRecommendation({
+        followUp: true,
+        history: this.state.lastResponse,
+        prompt: message
+      });
+
+      this.setState(prevState => ({
+        messages: [...prevState.messages, { type: 'system', content: response }],
+        lastResponse: response,
+        isLoading: false
+      }));
+    } catch (error) {
+      this.setState(prevState => ({
+        messages: [
+          ...prevState.messages,
+          { type: 'system', content: 'Sorry, there was an error processing your request.' }
+        ],
+        isLoading: false
+      }));
     }
   };
 
@@ -102,7 +166,7 @@ export default class RecipeRecommendation extends Component {
   };
 
   render() {
-    const { ingredients, maxCalories, servings, notes, errors, currentIngredient } = this.state;
+    const { ingredients, maxCalories, servings, notes, errors, currentIngredient, messages, isLoading, showChat } = this.state;
 
     return (
       <section className="recipe-recommendation">
@@ -203,12 +267,28 @@ export default class RecipeRecommendation extends Component {
                 type="submit"
                 variant="primary"
                 onClick={this.handleSubmit}
+                disabled={isLoading}
               >
-                Get Recipes
+                {isLoading ? 'Generating...' : 'Get Recipes'}
               </Button>
             </div>
           </div>
         </div>
+
+        {/* Chat Section */}
+        {showChat && (
+          <div className="recipe-content chat-wrapper">
+            <h3 className="recipe-title">Your Recipe & Follow-up Questions</h3>
+            <p className="recipe-description">
+              Ask questions about the recipe or request modifications
+            </p>
+            <Chat
+              messages={messages}
+              onSendMessage={this.handleChatMessage}
+              isLoading={isLoading}
+            />
+          </div>
+        )}
       </section>
     );
   }
