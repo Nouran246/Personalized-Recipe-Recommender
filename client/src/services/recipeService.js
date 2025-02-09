@@ -1,20 +1,20 @@
 const API_BASE_URL = process.env.REACT_APP_API_BASE_URL;
-const API_CODE = process.env.REACT_APP_API_CODE;
 
-if (!API_BASE_URL || !API_CODE) {
+
+if (!API_BASE_URL || !process.env.REACT_APP_API_CODE) {
     console.error('Missing required environment variables. Please check .env file.');
 }
 
 export const recipeService = {
     async getRecipeRecommendation(data) {
         try {
-            if (!API_BASE_URL || !API_CODE) {
+            if (!API_BASE_URL || !process.env.REACT_APP_API_CODE) {
                 throw new Error('API configuration is missing');
             }
 
             console.log('Making API request with data:', data);
 
-            const response = await fetch(`${API_BASE_URL}/ask?code=${API_CODE}`, {
+            const response = await fetch(`${API_BASE_URL}/ask?code=${process.env.REACT_APP_API_CODE}`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
