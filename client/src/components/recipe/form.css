@@ -433,3 +433,54 @@ button.secondary:hover {
   font-size: 1.1rem;
   color: var(--text);
 }
+
+@media (max-width: 768px) {
+  .recipe-content {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+
+  .recipe-title {
+    font-size: 1.8rem;
+  }
+
+  .recipe-description {
+    font-size: 1rem;
+  }
+
+  .form-group {
+    gap: 0.5rem;
+  }
+
+  .ingredients-input {
+    flex-direction: column;
+  }
+
+  .ingredients-input button {
+    width: 100%;
+    margin-top: 0.5rem;
+  }
+
+  .ingredients-tags {
+    gap: 0.5rem;
+  }
+
+  .ingredient-tag {
+    font-size: 0.9rem;
+    padding: 0.5rem 1rem;
+  }
+
+  .servings-controls {
+    justify-content: center;
+  }
+
+  .calories-slider-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .calories-value {
+    text-align: center;
+    margin-top: 0.5rem;
+  }
+}

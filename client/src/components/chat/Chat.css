@@ -68,3 +68,37 @@
 .chat-input-container input:focus {
     border-color: var(--primary);
 }
+
+@media (max-width: 768px) {
+    .chat-container {
+        padding: 1rem;
+        margin-top: 1rem;
+        min-height: 300px;
+    }
+
+    .messages-container {
+        padding: 0.5rem;
+        max-height: 400px;
+    }
+
+    .message {
+        padding: 0.75rem;
+        font-size: 1rem;
+        max-width: 95%;
+    }
+
+    .chat-input-container {
+        padding: 0.5rem;
+        gap: 0.5rem;
+        flex-direction: column;
+    }
+
+    .chat-input-container input {
+        padding: 0.75rem;
+        font-size: 1rem;
+    }
+
+    .chat-input-container button {
+        width: 100%;
+    }
+}

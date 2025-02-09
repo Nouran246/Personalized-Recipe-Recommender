@@ -88,7 +88,11 @@ export default class RecipeRecommendation extends Component {
 
     try {
       const { ingredients, maxCalories, servings, notes } = this.state;
-      console.log('Submitting recipe request with:', { ingredients, maxCalories, servings, notes });
+
+      // Create a more natural request message
+      const requestMessage = `I want a recipe using these ingredients: ${ingredients.join(', ')}. ` +
+        `It should be under ${maxCalories} calories and serve ${servings} people. ` +
+        (notes ? `Additional preferences: ${notes}` : '');
 
       const response = await recipeService.getRecipeRecommendation({
         ingredients,
@@ -99,12 +103,10 @@ export default class RecipeRecommendation extends Component {
         notes
       });
 
-      console.log('Received response:', response);
-
       this.setState(prevState => ({
         messages: [
           ...prevState.messages,
-          { type: 'user', content: `Generate recipe with: ${ingredients.join(', ')}` },
+          { type: 'user', content: requestMessage },
           { type: 'system', content: response }
         ],
         lastResponse: response,
