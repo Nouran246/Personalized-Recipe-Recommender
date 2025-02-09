@@ -97,3 +97,12 @@ local.settings.json
 __blobstorage__
 __queuestorage__
 __azurite_db*__.json
+
+# Environment files
+.env
+.env.local
+.env.development
+.env.production
+
+# But keep the template
+!.env.template
