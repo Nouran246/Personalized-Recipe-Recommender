@@ -2,6 +2,7 @@ const express = require('express');
 const sql = require('mssql');
 const bcrypt = require('bcryptjs');
 const dbConfig = require('../src/functions/dbConfig'); // Ensure this path is correct
+const path = require('path'); // Add this line
 
 const app = express();
 const cors = require('cors');
@@ -9,6 +10,9 @@ app.use(cors());  // Allow all origins, or configure it for specific domains
 
 // Middleware
 app.use(express.json());
+
+// Serve static files from the React app
+app.use(express.static(path.join(__dirname, '../client/build')));
 
 // Connect to the Azure SQL Database once (reusable connection pool)
 let pool;
@@ -25,7 +29,7 @@ const connectToDb = async () => {
 // Call connect function
 connectToDb();
 
-// Signup Route
+// API Routes
 app.post('/Signup', async (req, res) => {
   const { firstName, lastName, email, password } = req.body;
 
@@ -66,6 +70,7 @@ app.post('/Signup', async (req, res) => {
     res.status(500).json({ error: 'An error occurred while signing up.' });
   }
 });
+
 app.post('/login', async (req, res) => {
   const { email, password } = req.body;
 
@@ -100,9 +105,9 @@ app.post('/login', async (req, res) => {
   }
 });
 
-// Example route (for testing)
-app.get('/', (req, res) => {
-  res.send('Hello from back end');
+// Handle React routing, return all requests to React app
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, '../client/build', 'index.html'));
 });
 
 // Handle server shutdown
