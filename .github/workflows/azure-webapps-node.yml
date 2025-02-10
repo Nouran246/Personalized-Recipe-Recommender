@@ -17,18 +17,16 @@
 # For more information on the Azure Web Apps Deploy action: https://github.com/Azure/webapps-deploy
 # For more samples to get started with GitHub Action workflows to deploy to Azure: https://github.com/Azure/actions-workflow-samples
 
-name: Deploy React + Node.js App to Azure
-
 on:
   push:
     branches: [ "main" ]
   workflow_dispatch:
 
 env:
-  AZURE_WEBAPP_NAME: Chefs-whispers-recipe-recommender  # Your Azure Web App name
-  AZURE_WEBAPP_PACKAGE_PATH: './client/build'           # Path to React build folder
-  AZURE_BACKEND_PATH: './server'                        # Path to Node.js backend folder
-  NODE_VERSION: '20.x'                                  # Node.js version
+  AZURE_WEBAPP_NAME: Chefs-whispers-recipe-recommender    # set this to your application's name
+  AZURE_WEBAPP_PACKAGE_PATH: './client/build'      # set this to the path to your web app project, defaults to the repository root
+  AZURE_BACKEND_PATH: './server'                       # Path to your Node.js backend folder
+  NODE_VERSION: '20.x'                # set this to the node version to use
 
 permissions:
   contents: read
@@ -37,32 +35,25 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
+    - uses: actions/checkout@v4
 
-      - name: Set up Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: ${{ env.NODE_VERSION }}
-          cache: 'npm'
+    - name: Set up Node.js
+      uses: actions/setup-node@v4
+      with:
+        node-version: ${{ env.NODE_VERSION }}
+        cache: 'npm'
 
-      - name: Install dependencies and build React app
-        run: |
-          cd client
-          npm install
-          npm run build
+    - name: npm install, build, and test
+      run: |
+        npm install
+        npm run build --if-present
+        npm run test --if-present
 
-      - name: Install Node.js backend dependencies
-        run: |
-          cd server
-          npm install
-
-      - name: Upload artifacts
-        uses: actions/upload-artifact@v4
-        with:
-          name: app
-          path: |
-            client/build
-            server
+    - name: Upload artifact for deployment job
+      uses: actions/upload-artifact@v4
+      with:
+        name: node-app
+        path: .
 
   deploy:
     permissions:
@@ -72,17 +63,17 @@ jobs:
     environment:
       name: 'Development'
       url: ${{ steps.deploy-to-webapp.outputs.webapp-url }}
-    steps:
-      - name: Download artifact from build job
-        uses: actions/download-artifact@v4
-        with:
-          name: app
-          path: .
 
-      - name: Deploy to Azure WebApp
-        id: deploy-to-webapp
-        uses: azure/webapps-deploy@v2
-        with:
-          app-name: ${{ env.AZURE_WEBAPP_NAME }}
-          publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
-          package: .
+    steps:
+    - name: Download artifact from build job
+      uses: actions/download-artifact@v4
+      with:
+        name: node-app
+
+    - name: 'Deploy to Azure WebApp'
+      id: deploy-to-webapp
+      uses: azure/webapps-deploy@v2
+      with:
+        app-name: ${{ env.AZURE_WEBAPP_NAME }}
+        publish-profile: ${{ secrets.AZURE_WEBAPP_PUBLISH_PROFILE }}
+        package: ${{ env.AZURE_WEBAPP_PACKAGE_PATH }}
