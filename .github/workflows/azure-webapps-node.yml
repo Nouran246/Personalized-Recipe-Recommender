@@ -24,9 +24,9 @@ on:
 
 env:
   AZURE_WEBAPP_NAME: chefs-whispers-recipe-recommender    # set this to your application's name
-  AZURE_WEBAPP_PACKAGE_PATH: './client/npm start'          # Path to the React frontend build folder
-  AZURE_BACKEND_PATH: './server/node app.js'                       # Path to your Node.js backend folder
-  NODE_VERSION: '20.x'                # set this to the node version to use
+  AZURE_WEBAPP_PACKAGE_PATH: './client/build'             # Path to the React frontend build folder
+  AZURE_BACKEND_PATH: './server'                          # Path to your Node.js backend folder
+  NODE_VERSION: '20.x'                                    # set this to the node version to use
 
 permissions:
   contents: read
