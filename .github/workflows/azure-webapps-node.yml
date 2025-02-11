@@ -49,6 +49,13 @@ jobs:
         npm run build --if-present
         npm run test --if-present
 
+    - name: Check if build directory exists
+      run: |
+        if [ ! -d "./client/build" ]; then
+          echo "Build directory does not exist. Please check your build step."
+          exit 1
+        fi
+
     - name: Upload artifact for deployment job
       uses: actions/upload-artifact@v4
       with:
