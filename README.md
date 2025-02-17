@@ -1,5 +1,5 @@
 # Personalized Recipe Recommender
-
+## pitch deck powerpont : https://docs.google.com/presentation/d/1u2ZTVCi-GlrsA95lf-YgJGmpgjTnXTrr/edit?usp=sharing&ouid=107175027151394535275&rtpof=true&sd=true
 ## Environment Setup
 
 1. Create a `.env` file in the client directory by copying `.env.template`:
