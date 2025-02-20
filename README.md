@@ -2,6 +2,10 @@
 
 A web application that provides personalized recipe recommendations based on available ingredients, dietary preferences, and nutritional requirements.
 
+## Powerpoint Presentation
+
+https://docs.google.com/presentation/d/1u2ZTVCi-GlrsA95lf-YgJGmpgjTnXTrr/edit?usp=sharing&ouid=107175027151394535275&rtpof=true&sd=true
+
 ## Features
 
 - **Ingredient-Based Recipe Generation**: Input available ingredients to get customized recipes
